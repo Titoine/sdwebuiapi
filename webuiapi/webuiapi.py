@@ -45,6 +45,7 @@ class WebUIApiResult:
     images: list
     parameters: dict
     info: dict
+    control_net_poses: dict = None
 
     @property
     def image(self):
@@ -476,7 +477,11 @@ class WebUIApi:
         if "parameters" in r.keys():
             parameters = r["parameters"]
 
-        return WebUIApiResult(images, parameters, info)
+        control_net_poses = None
+        if "poses" in r.keys():
+            control_net_poses = r["poses"]
+
+        return WebUIApiResult(images, parameters, info, control_net_poses)
 
     async def _to_api_result_async(self, response):
         if response.status != 200:
@@ -504,7 +509,11 @@ class WebUIApi:
         if "parameters" in r.keys():
             parameters = r["parameters"]
 
-        return WebUIApiResult(images, parameters, info)
+        control_net_poses = None
+        if "poses" in r.keys():
+            control_net_poses = r["poses"]
+
+        return WebUIApiResult(images, parameters, info, control_net_poses)
 
     def txt2img(
         self,
