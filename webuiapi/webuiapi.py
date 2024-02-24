@@ -736,6 +736,7 @@ class WebUIApi:
         use_deprecated_controlnet=False,
         use_async=False,
     ):
+        print('WTF')
         if sampler_name is None:
             sampler_name = self.default_sampler
         if sampler_index is None:
